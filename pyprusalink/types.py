@@ -1,5 +1,5 @@
 from enum import Enum
-from typing import TypedDict
+from typing import NotRequired, TypedDict
 
 """Types of the v1 API. Source: https://github.com/prusa3d/Prusa-Link-Web/blob/master/spec/openapi.yaml"""
 
@@ -135,15 +135,15 @@ class JobInfo(TypedDict):
     file: JobFilePrint | None
 
 
-class Storage(TypedDict, total=False):
+class Storage(TypedDict):
     """A storage device returned by /api/v1/storage."""
 
-    name: str
     type: str
     path: str
-    read_only: bool
     available: bool
-    free_space: int
-    total_space: int
-    print_files: int
-    system_files: int
+    name: NotRequired[str]
+    read_only: NotRequired[bool]
+    free_space: NotRequired[int]
+    total_space: NotRequired[int]
+    print_files: NotRequired[int]
+    system_files: NotRequired[int]
