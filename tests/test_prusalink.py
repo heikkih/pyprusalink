@@ -76,6 +76,7 @@ async def test_get_status(pl, respx_mock):
                     "path": "/usb/",
                     "name": "usb",
                     "read_only": False,
+                    "free_space": 4202335,
                 },
             },
         )
@@ -86,6 +87,7 @@ async def test_get_status(pl, respx_mock):
     assert result["job"]["id"] == 42
     assert result["job"]["time_remaining"] == 980
     assert result["storage"]["name"] == "usb"
+    assert result["storage"]["free_space"] == 4202335
 
 
 async def test_get_status_idle(pl, respx_mock):

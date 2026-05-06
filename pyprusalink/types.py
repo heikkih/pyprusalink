@@ -96,12 +96,15 @@ class PrinterStatusInfo(TypedDict):
 
 
 class StatusJob(TypedDict, total=False):
-    """Job summary embedded in the status response."""
+    """Job summary embedded in the status response.
+
+    All fields are optional per the OpenAPI spec.
+    """
 
     id: int
     progress: float
     time_printing: int
-    time_remaining: int | None
+    time_remaining: int
 
 
 class StatusStorage(TypedDict):
@@ -110,14 +113,15 @@ class StatusStorage(TypedDict):
     path: str
     name: str
     read_only: bool
+    free_space: NotRequired[int]
 
 
 class PrinterStatus(TypedDict):
     """Printer status."""
 
     printer: PrinterStatusInfo
-    job: NotRequired[StatusJob | None]
-    storage: NotRequired[StatusStorage | None]
+    job: NotRequired[StatusJob]
+    storage: NotRequired[StatusStorage]
 
 
 class PrintFileRefs(TypedDict):
