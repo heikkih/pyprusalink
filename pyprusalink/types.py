@@ -1,5 +1,5 @@
 from enum import Enum
-from typing import TypedDict
+from typing import NotRequired, TypedDict
 
 """Types of the v1 API. Source: https://github.com/prusa3d/Prusa-Link-Web/blob/master/spec/openapi.yaml"""
 
@@ -135,17 +135,17 @@ class JobInfo(TypedDict):
     file: JobFilePrint | None
 
 
-class Transfer(TypedDict, total=False):
+class Transfer(TypedDict):
     """An active file transfer returned by /api/v1/transfer."""
 
-    id: int
     type: str
     display_name: str
     path: str
-    url: str
-    size: int
     progress: float
     transferred: int
-    time_remaining: int
     time_transferring: int
     to_print: bool
+    id: NotRequired[int]
+    url: NotRequired[str]
+    size: NotRequired[int]
+    time_remaining: NotRequired[int]
