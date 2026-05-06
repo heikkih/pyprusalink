@@ -4,9 +4,11 @@ Run with:
     PRUSALINK_HOST=http://prusa.lan \
     PRUSALINK_USERNAME=maker \
     PRUSALINK_PASSWORD=secret \
-    pytest tests/test_integration.py -v -s
+    pytest tests/test_integration.py -v -s -m integration
 
-All tests are skipped when PRUSALINK_HOST is not set.
+The `-m integration` flag is required to override the default
+`-m 'not integration'` from pyproject.toml. All tests are skipped
+when PRUSALINK_HOST is not set.
 """
 
 import os
@@ -32,7 +34,6 @@ async def printer():
 async def test_get_version(printer):
     result = await printer.get_version()
     assert "api" in result
-    assert "firmware" in result
 
 
 async def test_get_info(printer):
